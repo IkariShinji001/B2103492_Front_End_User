@@ -46,8 +46,7 @@
                   name="money_off"
                   @click="cancelOrder(order._id)"
                   v-if="
-                    (order.status === 'Chấp nhận đơn hàng' ||
-                      order.status === 'Chờ xác nhận') &&
+                    order.status === 'Chờ xác nhận' &&
                     order.statusDilivery !== 'Đã nhận đơn hàng'
                   "
                 ></q-icon>
@@ -319,11 +318,11 @@ img {
   color: white;
 }
 
-.header-table{
+.header-table {
   position: sticky;
 }
 
-.body-table{
+.body-table {
   height: 450px;
   overflow: scroll;
 }
