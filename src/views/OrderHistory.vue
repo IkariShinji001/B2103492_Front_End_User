@@ -96,6 +96,16 @@
           </div>
 
           <div class="row label-infor">
+            <div class="col-md-3">Ngày đặt hàng:</div>
+            <div class="col-md-9">{{ formatDate(orderDetail.orderDate) }}</div>
+          </div>
+
+          <div class="row label-infor" v-if="orderDetail.status !== 'Hủy đơn hàng'">
+            <div class="col-md-3">Ngày dự kiến giao hàng:</div>
+            <div class="col-md-9">{{ formatDate(orderDetail.deliveryDate) }}</div>
+          </div>
+
+          <div class="row label-infor">
             <div class="col-md-3">Ghi chú:</div>
             <div class="col-md-9">{{ orderDetail.notes }}</div>
           </div>
@@ -169,9 +179,11 @@ export default {
       if (!confirm) {
         return;
       }
+      const index = orders.value.findIndex((order) => order._id === id);
 
       try {
         const res = await orderService.cancelOrder(id);
+        orders.value[index].status = "Hủy đơn hàng"
         toast.success("Hủy đơn hàng thành công");
       } catch (error) {
         console.log(error);
